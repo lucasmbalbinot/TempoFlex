@@ -1,0 +1,26 @@
+{
+    "visual": {
+        "name": "filtroDataPeriodo",
+        "displayName": "Filtro de Data com Períodos",
+        "guid": "filtroDataPeriodoA7C31E0B5F2D4E6C9B8A",
+        "visualClassName": "Visual",
+        "version": "1.4.0.0",
+        "description": "Filtro de data com caixas De/Até, calendário, controle deslizante e botões de período rápido configuráveis.",
+        "supportUrl": "https://github.com",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "5.11.1",
+    "author": {
+        "name": "Lucas Machado Balbinot",
+        "email": "lucas98balbinot@gmail.com"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": [],
+    "version": "1.4.0.0"
+}

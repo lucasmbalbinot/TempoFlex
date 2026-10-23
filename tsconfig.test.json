@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "commonjs",
+        "lib": [
+            "es2020",
+            "dom"
+        ],
+        "outDir": ".tmp/test",
+        "skipLibCheck": true,
+        "types": [],
+        "strict": false
+    },
+    "files": [
+        "test/periodos.test.ts",
+        "test/precisao.test.ts"
+    ]
+}

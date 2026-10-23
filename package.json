@@ -1,0 +1,29 @@
+{
+  "name": "filtro-data-periodo",
+  "description": "Visual do Power BI: filtro de data com períodos rápidos",
+  "version": "1.4.0",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "pbiviz start",
+    "package": "pbiviz package",
+    "lint": "npx eslint .",
+    "test": "tsc -p tsconfig.test.json && node .tmp/test/test/periodos.test.js && node .tmp/test/test/precisao.test.js",
+    "test:browser:build": "node test/browser.cjs"
+  },
+  "dependencies": {
+    "powerbi-models": "^2.2.0",
+    "powerbi-visuals-api": "5.11.1",
+    "powerbi-visuals-utils-formattingmodel": "6.0.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "eslint": "^9.11.1",
+    "eslint-plugin-powerbi-visuals": "^1.0.0",
+    "powerbi-visuals-tools": "^7.2.1",
+    "typescript": "5.5.4"
+  }
+}

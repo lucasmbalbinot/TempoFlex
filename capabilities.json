@@ -1,0 +1,406 @@
+{
+    "dataRoles": [
+        {
+            "displayName": "Data",
+            "name": "data",
+            "kind": "Grouping",
+            "description": "Coluna de data (use o campo, nÃ£o a hierarquia de datas)"
+        }
+    ],
+    "dataViewMappings": [
+        {
+            "conditions": [
+                {
+                    "data": {
+                        "max": 1
+                    }
+                }
+            ],
+            "categorical": {
+                "categories": {
+                    "for": {
+                        "in": "data"
+                    },
+                    "dataReductionAlgorithm": {
+                        "window": {
+                            "count": 30000
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "objects": {
+        "general": {
+            "properties": {
+                "filter": {
+                    "type": {
+                        "filter": true
+                    }
+                }
+            }
+        },
+        "estado": {
+            "properties": {
+                "periodo": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "aplicadoEm": {
+                    "type": {
+                        "text": true
+                    }
+                }
+            }
+        },
+        "periodos": {
+            "properties": {
+                "mostrar": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "lista": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "posicao": {
+                    "type": {
+                        "enumeration": []
+                    }
+                },
+                "alinhamento": {
+                    "type": {
+                        "enumeration": []
+                    }
+                },
+                "quebrarLinha": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "primeiroDiaSemana": {
+                    "type": {
+                        "enumeration": []
+                    }
+                },
+                "cliqueDesmarca": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "bloquearDatas": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "mostrarLimpar": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "textoLimpar": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "organizacao": {
+                    "type": {
+                        "enumeration": []
+                    }
+                },
+                "colunas": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "tamanhoArea": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "variaveis": {
+                    "type": {
+                        "text": true
+                    }
+                }
+            }
+        },
+        "botoes": {
+            "properties": {
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "italic": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "underline": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "corTexto": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corFundo": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corBorda": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corTextoAtivo": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corFundoAtivo": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corBordaAtiva": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "raio": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "espacamento": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "preenchimento": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "larguraMinima": {
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
+        },
+        "datas": {
+            "properties": {
+                "formato": {
+                    "type": {
+                        "enumeration": []
+                    }
+                },
+                "fontFamily": {
+                    "type": {
+                        "formatting": {
+                            "fontFamily": true
+                        }
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "formatting": {
+                            "fontSize": true
+                        }
+                    }
+                },
+                "bold": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "italic": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "underline": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "corTexto": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corFundo": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corBorda": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "raio": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "mostrarRotulos": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "rotuloInicio": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "rotuloFim": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "mostrarCalendario": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "limitarAosDados": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "alinhamentoTexto": {
+                    "type": {
+                        "enumeration": []
+                    }
+                },
+                "mostrar": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "modo": {
+                    "type": {
+                        "enumeration": []
+                    }
+                },
+                "nivel": {
+                    "type": {
+                        "enumeration": []
+                    }
+                }
+            }
+        },
+        "deslizante": {
+            "properties": {
+                "mostrar": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "corTrilha": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corIntervalo": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "corAlca": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "guia": {
+            "properties": {
+                "mostrar": {
+                    "type": {
+                        "bool": true
+                    }
+                }
+            }
+        }
+    },
+    "supportsHighlight": false,
+    "supportsKeyboardFocus": true,
+    "supportsSynchronizingFilterState": true,
+    "supportsEmptyDataView": true,
+    "suppressDefaultTitle": false,
+    "privileges": [],
+    "supportsLandingPage": true
+}
