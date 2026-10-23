@@ -45,7 +45,7 @@ Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.3**.
 
 ## Comece em poucos passos
 
-1. Obtenha o arquivo `.pbiviz` nas [Releases do TempoFlex](https://github.com/lucasmbalbinot/TempoFlex/releases), quando houver uma versão publicada, ou [gere o pacote a partir do código](docs/DESENVOLVIMENTO.md).
+1. [Baixe o `.pbiviz` da versão 1.4.3](https://github.com/lucasmbalbinot/TempoFlex/releases/download/v1.4.3/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.3.0.pbiviz) na [release oficial](https://github.com/lucasmbalbinot/TempoFlex/releases/tag/v1.4.3), ou [gere o pacote a partir do código](docs/DESENVOLVIMENTO.md).
 2. No Power BI Desktop, abra **Visualizações → … → Importar um visual de um arquivo** e selecione o `.pbiviz`.
 3. Adicione TempoFlex à página e arraste uma coluna do tipo **Data** ou **Data/Hora** para o campo **Data** do visual. Escolha a coluna, **sem a hierarquia automática**.
 4. Em **Formatar visual → Caixas de data**, escolha o modo e o nível do filtro.
