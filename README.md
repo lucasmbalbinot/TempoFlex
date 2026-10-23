@@ -10,7 +10,7 @@
 
 TempoFlex reúne **seleção de datas**, **calendário nativo**, **controle deslizante** e **períodos rápidos configuráveis** em um visual do Power BI. Crie atalhos como Hoje, Mês anterior e Ano atual, ou use ciclos próprios, como um mês de competência que começa no dia 26. Sem tabela ou medida auxiliar.
 
-Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.2**.
+Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.3**.
 
 ## Documentação
 
@@ -21,6 +21,9 @@ Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.2**.
 | Compilar, testar e entender o código | [Guia de desenvolvimento](docs/DESENVOLVIMENTO.md) |
 | Preparar o repositório e uma release pública | [Guia de publicação](docs/PUBLICACAO.md) |
 | Reportar um problema ou contribuir | [Como contribuir](CONTRIBUTING.md) |
+| Preparar a oferta e conferir pendências do AppSource | [Kit AppSource](appsource/README.md) |
+| Dados fictícios e roteiro de demonstração offline | [Demonstração](demo/README.md) |
+| Suporte, privacidade e termos | [Suporte](SUPPORT.md) · [Privacidade](PRIVACY.md) · [Termos](TERMS.md) |
 | Consultar as mudanças por versão | [Histórico de versões](CHANGELOG.md) |
 | Entender as permissões de uso e modificação | [Licença GPL-3.0](LICENSE) |
 
@@ -42,7 +45,7 @@ Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.2**.
 
 ## Comece em poucos passos
 
-1. Obtenha o arquivo `.pbiviz` na aba **Releases** do repositório, quando houver uma release publicada, ou [gere o pacote a partir do código](docs/DESENVOLVIMENTO.md).
+1. Obtenha o arquivo `.pbiviz` nas [Releases do TempoFlex](https://github.com/lucasmbalbinot/TempoFlex/releases), quando houver uma versão publicada, ou [gere o pacote a partir do código](docs/DESENVOLVIMENTO.md).
 2. No Power BI Desktop, abra **Visualizações → … → Importar um visual de um arquivo** e selecione o `.pbiviz`.
 3. Adicione TempoFlex à página e arraste uma coluna do tipo **Data** ou **Data/Hora** para o campo **Data** do visual. Escolha a coluna, **sem a hierarquia automática**.
 4. Em **Formatar visual → Caixas de data**, escolha o modo e o nível do filtro.
@@ -112,6 +115,17 @@ npm run package
 ```
 
 O pacote fica em `dist/`. Dependências, certificados e saídas de build são ignorados pelo Git. Para certificados, testes no navegador e organização do código, consulte [Desenvolvimento](docs/DESENVOLVIMENTO.md).
+
+## Publicação
+
+O repositório oficial é [lucasmbalbinot/TempoFlex](https://github.com/lucasmbalbinot/TempoFlex). A publicação comum no AppSource ainda não foi enviada. O kit inclui logo 300 × 300, textos em português/inglês, URLs legais, dados offline e comandos para gerar pacotes. As imagens `appsource/media/preview-*` são **ilustrações**, não screenshots do Power BI.
+
+```bash
+npm run release:prepare
+npm run release:check -- --submission
+```
+
+O primeiro comando gera o pacote e registra pendências. O segundo exige PBIX, screenshots reais e evidências de teste; deve falhar enquanto esses itens estiverem pendentes. Os scripts não abrem aplicativos, não fazem push e não enviam ofertas. Veja o [checklist](appsource/CHECKLIST.md).
 
 ## Licença
 

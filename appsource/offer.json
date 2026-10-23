@@ -1,0 +1,19 @@
+{
+  "offerIdProposal": "tempoflex",
+  "offerType": "PowerBIVisual",
+  "distribution": "free",
+  "repository": "https://github.com/lucasmbalbinot/TempoFlex",
+  "supportUrl": "https://github.com/lucasmbalbinot/TempoFlex/issues",
+  "documentationUrl": "https://github.com/lucasmbalbinot/TempoFlex/blob/main/docs/MANUAL.md",
+  "privacyUrl": "https://github.com/lucasmbalbinot/TempoFlex/blob/main/PRIVACY.md",
+  "termsUrl": "https://github.com/lucasmbalbinot/TempoFlex/blob/main/TERMS.md",
+  "license": "GPL-3.0-only",
+  "contact": { "name": "Lucas Machado Balbinot", "email": "lucas98balbinot@gmail.com" },
+  "languages": ["pt-BR", "en-US"],
+  "logo": "appsource/media/logo-300x300.png",
+  "sampleReport": "demo/TempoFlex-Demo.pbix",
+  "screenshotsDirectory": "appsource/screenshots",
+  "certificationRequested": false,
+  "submissionStatus": "not-submitted",
+  "notes": "O identificador e as escolhas da oferta são propostas para preenchimento pelo publicador. As URLs só estarão atualizadas após o envio dos arquivos para o GitHub público. Nenhum contrato foi aceito e nenhuma conta/oferta foi criada."
+}

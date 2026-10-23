@@ -1,8 +1,8 @@
 # Avisos de terceiros
 
-O código original do TempoFlex usa GPL-3.0-only. As dependências abaixo mantêm suas próprias licenças MIT. Os textos foram copiados dos pacotes instalados nas versões registradas no lockfile. Preserve os avisos aplicáveis ao redistribuir o software.
+O código original do TempoFlex usa GPL-3.0-only. As dependências de execução abaixo mantêm suas próprias licenças MIT. Os textos foram copiados dos pacotes instalados nas versões registradas no lockfile. Preserve os avisos aplicáveis ao redistribuir o software.
 
-Esta lista cobre as dependências diretas do projeto; ferramentas de desenvolvimento e eventuais alterações futuras da árvore devem ser verificadas nas respectivas distribuições.
+Esta lista cobre as dependências de execução diretas do projeto; ferramentas de desenvolvimento e eventuais alterações futuras da árvore devem ser verificadas nas respectivas distribuições.
 
 ## powerbi-models 2.2.0
 
@@ -79,3 +79,7 @@ MIT License
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE
 ```
+
+## Ferramentas de publicação (somente desenvolvimento)
+
+As ferramentas `@resvg/resvg-js` 2.6.2 (MPL-2.0) e `jszip` 3.10.1 (MIT OR GPL-3.0-or-later) são utilizadas pelos scripts de renderização e empacotamento. Seus módulos não são importados pelo código do visual, e os pacotes ZIP de fonte não incluem `node_modules`. Consulte as licenças dos pacotes instalados ao redistribuir essas ferramentas ou suas bibliotecas nativas. A geração de imagens não altera a licença do projeto.

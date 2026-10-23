@@ -1,10 +1,10 @@
 {
   "name": "tempoflex-powerbi",
   "description": "TempoFlex: filtro de datas para Power BI com períodos rápidos, ciclos personalizados e calendário nativo",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/lucasmbalbinot/TempoFlex.git"
   },
   "license": "GPL-3.0-only",
   "scripts": {
@@ -13,7 +13,10 @@
     "lint": "npx eslint .",
     "test": "tsc -p tsconfig.test.json && node .tmp/test/test/periodos.test.js && node .tmp/test/test/precisao.test.js",
     "test:browser:build": "node test/browser.cjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "assets:build": "node scripts/build-assets.cjs",
+    "release:check": "node scripts/check-release.cjs",
+    "release:prepare": "node scripts/prepare-release.cjs"
   },
   "dependencies": {
     "powerbi-models": "^2.2.0",
@@ -21,9 +24,11 @@
     "powerbi-visuals-utils-formattingmodel": "6.0.4"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
     "@typescript-eslint/eslint-plugin": "^8.8.0",
     "eslint": "^9.11.1",
     "eslint-plugin-powerbi-visuals": "^1.0.0",
+    "jszip": "3.10.1",
     "powerbi-visuals-tools": "^7.2.1",
     "typescript": "5.5.4"
   },
@@ -33,5 +38,14 @@
     "date-filter",
     "date-slicer",
     "typescript"
-  ]
+  ],
+  "homepage": "https://github.com/lucasmbalbinot/TempoFlex#readme",
+  "bugs": {
+    "url": "https://github.com/lucasmbalbinot/TempoFlex/issues"
+  },
+  "overrides": {
+    "sockjs": {
+      "uuid": "11.1.1"
+    }
+  }
 }

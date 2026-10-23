@@ -439,3 +439,9 @@ Para reportar problemas, veja [Como contribuir](../CONTRIBUTING.md).
 Botões: Segoe UI 9 pt, cores de texto/fundo/borda para estados normal e ativo, raio de 4 px, espaço de 4 px, preenchimento de 4 px e largura mínima 0 (automática).
 
 Deslizante: vem ligado; cores independentes da trilha, intervalo e alças. Guia: vem desligado e só aparece no modo de edição.
+
+## Projeto, privacidade e suporte
+
+O código e as versões são mantidos em [lucasmbalbinot/TempoFlex](https://github.com/lucasmbalbinot/TempoFlex). Consulte [SUPPORT.md](../SUPPORT.md), [PRIVACY.md](../PRIVACY.md) e [TERMS.md](../TERMS.md). O material de demonstração usa somente dados fictícios e está em [demo](../demo/README.md).
+
+O kit AppSource não representa envio ou aprovação. O calendário continua nativo; as imagens promocionais geradas por código são ilustrações. As capturas reais e a validação Desktop/Service têm checklist próprio em [appsource](../appsource/README.md).

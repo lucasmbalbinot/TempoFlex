@@ -1,0 +1,28 @@
+name: Preparar distribuição
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preparar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run release:prepare
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TempoFlex-distribuicao
+          path: |
+            dist/*.pbiviz
+            dist/*.zip
+            dist/*-release.json
+            dist/*-SHA256SUMS.txt
+          if-no-files-found: error

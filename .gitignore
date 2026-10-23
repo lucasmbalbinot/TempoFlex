@@ -48,3 +48,8 @@ Desktop.ini
 *.abf
 *.bak
 *.tmp
+
+# Arquivos locais de projetos Power BI e evidências temporárias
+**/.pbi/
+*.pbip.local
+*.pbix.lock

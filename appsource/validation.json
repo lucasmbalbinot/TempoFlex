@@ -1,0 +1,9 @@
+{
+  "packageVersion": "1.4.3.0",
+  "desktop": { "validated": false, "version": null, "date": null },
+  "service": { "validated": false, "date": null },
+  "sampleReport": { "offlineValidated": false, "sameVisualVersionValidated": false },
+  "screenshots": { "capturedInPowerBI": false },
+  "publicUrls": { "reachableValidated": false },
+  "notes": "Preencher somente após os testes reais. Testes automatizados do código não comprovam a integração Desktop/Service. O arquivo PBIX não é fabricado a partir de um ZIP ou de um relatório thin sem dados."
+}

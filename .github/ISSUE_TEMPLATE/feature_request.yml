@@ -1,0 +1,16 @@
+name: Sugerir melhoria
+description: Explique um caso de uso para melhorar o TempoFlex.
+title: "[Melhoria]: "
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Que tarefa você precisa resolver?
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Comportamento desejado e exemplo
+    validations:
+      required: true

@@ -1,0 +1,30 @@
+name: Relatar problema
+description: Informe um defeito com um exemplo reproduzível e sem dados confidenciais.
+title: "[Bug]: "
+body:
+  - type: input
+    id: versao
+    attributes:
+      label: Versão do TempoFlex e do Power BI
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Passos para reproduzir
+      description: Inclua modo, nível de precisão e configuração dos períodos; use dados fictícios.
+    validations:
+      required: true
+  - type: textarea
+    id: resultado
+    attributes:
+      label: Resultado esperado e obtido
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacidade
+    attributes:
+      label: Dados compartilhados
+      options:
+        - label: Removi dados confidenciais, credenciais e informações de clientes.
+          required: true

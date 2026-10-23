@@ -20,5 +20,8 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test
+      - run: npm run assets:build
+      - run: npm run release:check
+      - run: npm audit --audit-level=moderate
       - name: Compilar harness de navegador (sem executar a interface)
         run: npm run test:browser:build

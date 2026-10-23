@@ -19,7 +19,7 @@ npm run package
 `npm ci` instala o lockfile sem atualizá-lo. `npm run package` gera o `.pbiviz` em `dist/`; essa pasta não é versionada. O nome do arquivo usa o GUID técnico, que é preservado para compatibilidade:
 
 ```text
-dist/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.2.0.pbiviz
+dist/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.3.0.pbiviz
 ```
 
 ## Comandos
@@ -27,6 +27,9 @@ dist/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.2.0.pbiviz
 | Comando | Finalidade |
 |---|---|
 | `npm ci` | Instalação reproduzível |
+| `npm run assets:build` | Renderiza PNGs e dados de demonstração via terminal |
+| `npm run release:check` | Confere metadados, mídia e pendências |
+| `npm run release:prepare` | Testa, compila e gera ZIPs, fonte e checksums |
 | `npm run typecheck` | Verificação TypeScript sem emitir arquivos |
 | `npm run lint` | ESLint e regras de visuais Power BI |
 | `npm test` | Lógica de períodos, variáveis, datas e precisão |
@@ -98,6 +101,20 @@ Confira campo com data e com data/hora; Entre/É/Dropdown; seis níveis; caixas 
 
 O empacotador informa recursos opcionais não declarados, incluindo bookmarks, localização e tooltips. Leia os avisos e não apresente esses cenários como certificados apenas porque o build concluiu.
 
+## Kit de publicação por terminal
+
+Os scripts de `scripts/` não iniciam aplicativos e não controlam a interface do computador. `@resvg/resvg-js` renderiza os vetores em PNG e `jszip` monta os arquivos de distribuição. São dependências de desenvolvimento; não são importadas pelo visual.
+
+`release:prepare` executa a sequência de validação, gera o PBIVIZ e dois ZIPs, registra SHA-256 e lista pendências. O fonte correspondente exclui certificados, relatórios binários e arquivos locais de recuperação. Para preparar uma submissão sem pendências, use `npm run release:prepare -- --submission`; esse modo exige o PBIX e evidências do host real.
+
+O estado auditável fica em `appsource/validation.json`. Não marque testes como concluídos sem executá-los. Não renomeie prévias ilustrativas para simular screenshots do Power BI.
+
 ## Licenças e dependências
 
 O projeto usa `GPL-3.0-only`. As bibliotecas conservam suas licenças; os avisos das dependências diretas estão em [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). Consulte o `LICENSE`/`NOTICE` de cada dependência ao redistribuir bundles. O `package-lock.json` registra a árvore utilizada; não substitui os avisos legais que precisarem acompanhar a distribuição.
+
+## Override do servidor de desenvolvimento
+
+A árvore do Power BI Visuals Tools 7.2.1 usa `sockjs`, que importava `uuid` 8.3.2. O alerta [GHSA-w5hq-g745-h8pq](https://github.com/uuidjs/uuid/security/advisories/GHSA-w5hq-g745-h8pq) foi corrigido na linha 11 em 11.1.1. O override `sockjs → uuid: 11.1.1` preserva a API CommonJS `require('uuid').v4` utilizada pelo SockJS e evita o downgrade incompatível do SDK sugerido pelo audit fix forçado. A importação CommonJS e a criação do servidor SockJS foram verificadas, além do empacotamento. A alteração afeta ferramentas de desenvolvimento, não o código importado pelo visual.
+
+Execute `npm audit` de novo antes de cada publicação; a base de alertas muda. Não remova o override sem conferir a resolução efetiva no lockfile e repetir as verificações.

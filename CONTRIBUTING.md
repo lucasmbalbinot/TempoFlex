@@ -4,7 +4,7 @@ Obrigado por ajudar a melhorar o TempoFlex. Você pode contribuir com relatos de
 
 ## Reportar um problema
 
-Abra uma Issue com:
+Abra uma [Issue](https://github.com/lucasmbalbinot/TempoFlex/issues/new/choose) com:
 
 - versão do TempoFlex e do Power BI Desktop/Service;
 - modo de seleção e nível do filtro;
@@ -32,3 +32,5 @@ Não envie certificados, senhas, tokens, `node_modules`, `dist`, relatórios com
 ## Licença das contribuições
 
 Ao enviar uma contribuição para inclusão no projeto, você concorda que ela seja disponibilizada sob `GPL-3.0-only`, conforme [LICENSE](LICENSE). Preserve os avisos de autoria e as licenças de código de terceiros. Não inclua material que você não tenha direito de compartilhar sob esses termos.
+
+Relatos de vulnerabilidade devem seguir [SECURITY.md](SECURITY.md), sem publicação antecipada em Issues abertas. Para materiais de publicação, mantenha a distinção entre prévias e capturas reais e execute `npm run release:check`.

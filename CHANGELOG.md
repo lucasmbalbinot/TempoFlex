@@ -1,5 +1,16 @@
 # Histórico de versões
 
+## 1.4.3
+
+- URLs reais do repositório TempoFlex e suporte configuradas nos metadados.
+- Política de privacidade, termos GPL, suporte e política de segurança em arquivos públicos.
+- Kit AppSource com listagens pt-BR/en-US, notas ao revisor, checklist e evidências pendentes explícitas.
+- Logo 300 × 300, ícone 20 × 20 e cinco prévias ilustrativas geradas pelo terminal.
+- Consulta Power Query offline, dados fictícios e roteiro do relatório de demonstração.
+- Comandos reproduzíveis de verificação, empacotamento, fonte correspondente e checksums.
+- Preparação de artefatos em GitHub Actions, sem publicação automática de oferta.
+- Override transitivo de uuid em SockJS para corrigir a auditoria do ambiente de desenvolvimento sem rebaixar o SDK.
+
 ## 1.4.2
 
 - Nome público **TempoFlex — Filtro de Datas**, mantendo o GUID técnico do visual.

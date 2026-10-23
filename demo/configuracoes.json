@@ -1,0 +1,18 @@
+{
+  "basico": {
+    "periodos": "Hoje = hoje\nOntem = ontem\nÚltimos 7 dias = hoje-6d .. hoje\nMês atual = inicio_mes .. hoje\nMês anterior = inicio_mes-1m .. fim_mes-1m\nOutubro de 2026 = 01/10/2026 .. 31/10/2026\nGeral = tudo",
+    "variaveis": ""
+  },
+  "competencia": {
+    "periodos": "Competência atual = inicio_competencia .. hoje\nCompetência completa = inicio_competencia .. fim_competencia\nCompetência anterior = inicio_competencia-1m .. fim_competencia-1m\nGeral = tudo",
+    "variaveis": "competencia = mensal dia 26"
+  },
+  "fiscal": {
+    "periodos": "Exercício até hoje = inicio_ano_fiscal .. hoje\nExercício completo = inicio_ano_fiscal .. fim_ano_fiscal\nExercício anterior = inicio_ano_fiscal-1a .. fim_ano_fiscal-1a\nGeral = tudo",
+    "variaveis": "ano_fiscal = anual 01/04"
+  },
+  "ultimaData": {
+    "periodos": "Último dia com dados = max\nÚltimos 7 dias da base = max-6d .. max\nÚltimos 30 dias da base = max-29d .. max\nBase inteira = tudo",
+    "variaveis": ""
+  }
+}
