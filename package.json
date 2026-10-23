@@ -1,18 +1,19 @@
 {
-  "name": "filtro-data-periodo",
-  "description": "Visual do Power BI: filtro de data com períodos rápidos",
-  "version": "1.4.1",
+  "name": "tempoflex-powerbi",
+  "description": "TempoFlex: filtro de datas para Power BI com períodos rápidos, ciclos personalizados e calendário nativo",
+  "version": "1.4.2",
   "repository": {
     "type": "git",
     "url": ""
   },
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "scripts": {
     "start": "pbiviz start",
     "package": "pbiviz package",
     "lint": "npx eslint .",
     "test": "tsc -p tsconfig.test.json && node .tmp/test/test/periodos.test.js && node .tmp/test/test/precisao.test.js",
-    "test:browser:build": "node test/browser.cjs"
+    "test:browser:build": "node test/browser.cjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "powerbi-models": "^2.2.0",
@@ -25,5 +26,12 @@
     "eslint-plugin-powerbi-visuals": "^1.0.0",
     "powerbi-visuals-tools": "^7.2.1",
     "typescript": "5.5.4"
-  }
+  },
+  "keywords": [
+    "powerbi",
+    "custom-visual",
+    "date-filter",
+    "date-slicer",
+    "typescript"
+  ]
 }

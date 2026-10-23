@@ -1,11 +1,11 @@
 {
     "visual": {
         "name": "filtroDataPeriodo",
-        "displayName": "Filtro de Data com Períodos",
+        "displayName": "TempoFlex — Filtro de Datas",
         "guid": "filtroDataPeriodoA7C31E0B5F2D4E6C9B8A",
         "visualClassName": "Visual",
-        "version": "1.4.1.0",
-        "description": "Filtro de data com caixas De/Até, calendário, controle deslizante e botões de período rápido configuráveis.",
+        "version": "1.4.2.0",
+        "description": "Filtro de datas com calendário nativo, períodos rápidos, ciclos personalizados e precisão de ano a segundo.",
         "supportUrl": "https://github.com",
         "gitHubUrl": ""
     },
@@ -22,5 +22,5 @@
     "capabilities": "capabilities.json",
     "dependencies": null,
     "stringResources": [],
-    "version": "1.4.1.0"
+    "version": "1.4.2.0"
 }

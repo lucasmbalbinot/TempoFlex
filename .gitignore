@@ -1,5 +1,50 @@
+# Dependências e saídas geradas
 node_modules/
 .tmp/
 dist/
+coverage/
+*.tsbuildinfo
 webpack.statistics.*.html
+
+# Logs e caches
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.cache/
+__pycache__/
+*.py[cod]
+
+# Certificados, chaves e configuração local
 *.pfx
+*.p12
+*.key
+*.pem
+pbiviz-certs/
+.env
+.env.*
+!.env.example
+.npmrc
+
+# IDE e sistema operacional
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.code-workspace
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Relatórios e dados locais
+*.pbix
+*.pbit
+*.pbiviz
+*.abf
+*.bak
+*.tmp

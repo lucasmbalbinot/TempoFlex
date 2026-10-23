@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580" role="img" aria-labelledby="title desc">
+  <title id="title">Quatro maneiras de selecionar seu período</title>
+  <desc id="desc">Ilustração dos modos Entre com duas datas, É com uma competência, Dropdown com busca e lista cronológica, e apenas períodos rápidos com as caixas ocultas.</desc>
+  <rect width="1200" height="580" rx="20" fill="#F1F6F5"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="35" y="47" font-size="27" font-weight="700" fill="#183D47">Um filtro. Quatro maneiras de usar.</text>
+    <text x="35" y="75" font-size="17" fill="#5E7880">Escolha os controles de acordo com o seu relatório.</text>
+    <g fill="#FFFFFF" stroke="#D6E2DF"><rect x="30" y="99" width="558" height="210" rx="13"/><rect x="612" y="99" width="558" height="210" rx="13"/><rect x="30" y="329" width="558" height="210" rx="13"/><rect x="612" y="329" width="558" height="210" rx="13"/></g>
+    <g fill="#183D47" font-size="23" font-weight="700"><text x="54" y="140">Entre</text><text x="636" y="140">É</text><text x="54" y="370">Dropdown</text><text x="636" y="370">Somente períodos rápidos</text></g>
+    <g fill="#FFFFFF" stroke="#BCD0CD">
+      <rect x="54" y="161" width="230" height="43" rx="5"/><rect x="316" y="161" width="247" height="43" rx="5"/>
+      <rect x="636" y="161" width="510" height="43" rx="5"/>
+      <rect x="54" y="388" width="509" height="124" rx="5"/>
+    </g>
+    <g font-size="20" fill="#34535C"><text x="69" y="189">01/10/2026</text><text x="296" y="189">–</text><text x="331" y="189">23/10/2026</text><text x="653" y="189">10/2026</text></g>
+    <path d="M68 233h481" stroke="#DDE7E5" stroke-width="5" stroke-linecap="round"/><path d="M68 233h345" stroke="#287B68" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#FFFFFF" stroke="#287B68" stroke-width="2.5"><circle cx="68" cy="233" r="8"/><circle cx="413" cy="233" r="8"/></g>
+    <text x="54" y="281" font-size="17" fill="#5E7880">Defina o início e o fim do intervalo.</text>
+    <rect x="636" y="220" width="130" height="30" rx="15" fill="#E6F4ED"/><text x="651" y="241" font-size="15" fill="#287B68">Nível: mês</text>
+    <text x="636" y="281" font-size="17" fill="#5E7880">Uma caixa. Toda a unidade escolhida.</text>
+    <rect x="64" y="397" width="489" height="31" rx="4" fill="#F2F6F5"/><text x="76" y="419" font-size="16" fill="#67838A">Buscar data…</text>
+    <text x="76" y="452" font-size="17" fill="#34535C">09/2026</text>
+    <rect x="64" y="462" width="489" height="31" rx="4" fill="#287B68"/><text x="76" y="484" font-size="17" fill="#FFFFFF">10/2026</text>
+    <g font-size="17" text-anchor="middle">
+      <rect x="636" y="398" width="99" height="43" rx="6" fill="#FFFFFF" stroke="#BCD0CD"/><text x="685" y="426" fill="#34535C">Hoje</text>
+      <rect x="744" y="398" width="126" height="43" rx="6" fill="#287B68"/><text x="807" y="426" fill="#FFFFFF">Mês atual</text>
+      <rect x="879" y="398" width="146" height="43" rx="6" fill="#FFFFFF" stroke="#BCD0CD"/><text x="952" y="426" fill="#34535C">Mês anterior</text>
+      <rect x="1034" y="398" width="112" height="43" rx="6" fill="#FFFFFF" stroke="#BCD0CD"/><text x="1090" y="426" fill="#34535C">Geral</text>
+    </g>
+    <text x="636" y="484" font-size="17" fill="#5E7880">Caixas ocultas. Atalhos em destaque.</text>
+    <text x="35" y="565" font-size="14" fill="#728A90">Ilustração dos controles • o seletor de calendário é nativo do navegador.</text>
+  </g>
+</svg>

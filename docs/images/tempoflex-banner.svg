@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+  <title id="title">TempoFlex — Seu período, suas regras</title>
+  <desc id="desc">Identidade visual do filtro para Power BI e ilustração de um intervalo de outubro de 2026, com os atalhos Hoje, Mês atual, Mês anterior e Geral.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#102D38"/><stop offset="1" stop-color="#194653"/></linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#B9DED8" opacity=".11"/></pattern>
+  </defs>
+  <rect width="1200" height="480" rx="24" fill="url(#bg)"/>
+  <rect x="780" width="420" height="480" rx="24" fill="url(#dots)"/>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <rect x="52" y="45" width="61" height="61" rx="15" fill="#B5EAD6"/>
+    <g stroke="#163D47" stroke-width="3" stroke-linecap="round" fill="none">
+      <rect x="66" y="62" width="33" height="30" rx="4"/><path d="M66 72h33M74 57v10M91 57v10M73 82h10m-3-4 4 4-4 4"/>
+    </g>
+    <text x="130" y="88" font-size="37" font-weight="700" fill="#FFFFFF">TempoFlex</text>
+    <text x="54" y="180" font-size="48" font-weight="700" fill="#FFFFFF">Seu período,</text>
+    <text x="54" y="237" font-size="48" font-weight="700" fill="#B5EAD6">suas regras.</text>
+    <text x="55" y="284" font-size="20" fill="#D2E2E7">Filtro de datas para Power BI.</text>
+    <text x="55" y="315" font-size="20" fill="#D2E2E7">Do ano ao segundo. Do mês civil à competência.</text>
+    <g font-size="15" font-weight="600" fill="#D4F4E9" text-anchor="middle">
+      <rect x="54" y="358" width="144" height="34" rx="17" fill="#28515C"/><text x="126" y="381">Períodos rápidos</text>
+      <rect x="208" y="358" width="145" height="34" rx="17" fill="#28515C"/><text x="280" y="381">Calendário nativo</text>
+      <rect x="363" y="358" width="135" height="34" rx="17" fill="#28515C"/><text x="430" y="381">Ciclos próprios</text>
+    </g>
+    <rect x="593" y="116" width="553" height="250" rx="17" fill="#081C26" opacity=".3"/>
+    <rect x="581" y="104" width="553" height="250" rx="17" fill="#FAFCFB"/>
+    <text x="609" y="144" font-size="18" fill="#173A43" font-weight="700">Período de análise</text>
+    <circle cx="1099" cy="138" r="5" fill="#54AB87"/>
+    <rect x="609" y="165" width="227" height="45" rx="6" fill="#FFFFFF" stroke="#C9D8D9"/>
+    <rect x="878" y="165" width="227" height="45" rx="6" fill="#FFFFFF" stroke="#C9D8D9"/>
+    <text x="625" y="194" font-size="20" fill="#21414A">01/10/2026</text>
+    <text x="855" y="194" text-anchor="middle" font-size="23" fill="#7B959D">–</text>
+    <text x="894" y="194" font-size="20" fill="#21414A">23/10/2026</text>
+    <g fill="none" stroke="#59737C" stroke-width="1.7">
+      <rect x="804" y="180" width="16" height="16" rx="2"/><path d="M804 185h16m-12-8v6m8-6v6"/>
+      <rect x="1073" y="180" width="16" height="16" rx="2"/><path d="M1073 185h16m-12-8v6m8-6v6"/>
+    </g>
+    <path d="M620 239h474" stroke="#DDE7E5" stroke-width="5" stroke-linecap="round"/>
+    <path d="M620 239h352" stroke="#287B68" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#FFFFFF" stroke="#287B68" stroke-width="2.5"><circle cx="620" cy="239" r="8"/><circle cx="972" cy="239" r="8"/></g>
+    <g font-size="16" text-anchor="middle">
+      <rect x="609" y="270" width="90" height="39" rx="6" fill="#FFFFFF" stroke="#CCDAD9"/><text x="654" y="295" fill="#35525B">Hoje</text>
+      <rect x="707" y="270" width="126" height="39" rx="6" fill="#287B68"/><text x="770" y="295" fill="#FFFFFF">Mês atual</text>
+      <rect x="841" y="270" width="147" height="39" rx="6" fill="#FFFFFF" stroke="#CCDAD9"/><text x="914" y="295" fill="#35525B">Mês anterior</text>
+      <rect x="996" y="270" width="109" height="39" rx="6" fill="#FFFFFF" stroke="#CCDAD9"/><text x="1050" y="295" fill="#35525B">Geral</text>
+    </g>
+    <text x="610" y="334" font-size="13" fill="#69828A">Ilustração • aparência e datas configuráveis</text>
+    <text x="55" y="441" font-size="14" letter-spacing="1.3" fill="#9ABBC2">CÓDIGO ABERTO · GPL-3.0 · TYPESCRIPT</text>
+  </g>
+</svg>
