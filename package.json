@@ -1,7 +1,7 @@
 {
   "name": "filtro-data-periodo",
   "description": "Visual do Power BI: filtro de data com períodos rápidos",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "repository": {
     "type": "git",
     "url": ""

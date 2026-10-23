@@ -52,6 +52,7 @@ interface Caixa {
     rotulo: HTMLElement;
     texto: HTMLInputElement;
     calendario: HTMLElement;
+    nativo: HTMLInputElement;
 }
 
 export class Visual implements IVisual {
@@ -178,16 +179,18 @@ export class Visual implements IVisual {
         texto.setAttribute("aria-label", nome);
         texto.autocomplete = "off";
         texto.spellcheck = false;
-        const calendario = this.el("button", "fdp-cal", campo);
-        calendario.type = "button";
-        calendario.setAttribute("aria-label", `${nome} (calendário)`);
-        calendario.setAttribute("aria-haspopup", "dialog");
+        const calendario = this.el("span", "fdp-cal", campo);
         calendario.appendChild(iconeCalendario());
-        calendario.addEventListener("click", () => {
-            if (texto.readOnly) { return; }
-            this.seletor.calendario(calendario, (inicio ? this.iniVisivel() : this.fimVisivel()) || D.hoje(), this.nivel(),
-                this.cfg.datas.limitarAosDados.value ? this.min : null, this.cfg.datas.limitarAosDados.value ? this.max : null,
-                d => this.escolherData(inicio, d));
+        // O input real recebe o clique: o popup do navegador pode ultrapassar o iframe do visual.
+        // Não chamar showPicker(): dentro de iframe de outra origem ele pode ser bloqueado.
+        const nativo = this.el("input", "fdp-nativo", calendario);
+        nativo.type = "date";
+        nativo.setAttribute("aria-label", `${nome} (calendário)`);
+        nativo.addEventListener("change", () => {
+            if (nativo.disabled || !nativo.value) { return; }
+            const valor = nativo.type === "month" ? `${nativo.value}-01` : nativo.value;
+            const d = P.deValor(valor);
+            if (d) { this.escolherData(inicio, P.inicio(d, this.nivel())); }
         });
 
         texto.addEventListener("input", () => { texto.dataset.editando = "1"; });
@@ -211,7 +214,7 @@ export class Visual implements IVisual {
         });
         texto.addEventListener("blur", () => this.confirmarDigitacao(inicio, texto));
         texto.addEventListener("focus", () => texto.select());
-        return { campo, rotulo, texto, calendario };
+        return { campo, rotulo, texto, calendario, nativo };
     }
 
     // ------------------------------------------------------------------ atualização
@@ -633,6 +636,26 @@ export class Visual implements IVisual {
         return i < 0 ? passos.length - 1 : i;
     }
 
+    private configurarNativo(caixa: Caixa, data: Date | null): void {
+        const nivel = this.nivel();
+        const tipo = nivel === "mes" ? "month" : ["hora", "minuto", "segundo"].includes(nivel) ? "datetime-local" : "date";
+        if (caixa.nativo.type !== tipo) { caixa.nativo.type = tipo; }
+        const valor = (d: Date | null) => {
+            if (!d) { return ""; }
+            const normalizada = P.inicio(d, nivel);
+            if (tipo === "month") { return D.paraIso(normalizada).slice(0, 7); }
+            if (tipo === "date") { return D.paraIso(normalizada); }
+            return P.iso(normalizada);
+        };
+        caixa.nativo.step = nivel === "hora" ? "3600" : nivel === "minuto" ? "60" : "1";
+        caixa.nativo.min = this.cfg.datas.limitarAosDados.value ? valor(this.min) : "";
+        // No modo ano, qualquer dia do ano limite deve continuar selecionável.
+        caixa.nativo.max = this.cfg.datas.limitarAosDados.value ?
+            (nivel === "ano" && this.max ? `${this.max.getFullYear()}-12-31` : valor(this.max)) : "";
+        const novo = valor(data);
+        if (caixa.nativo.value !== novo) { caixa.nativo.value = novo; }
+    }
+
     private mostrarDatas(): void {
         const ini = this.iniVisivel();
         const fim = this.fimVisivel();
@@ -643,6 +666,8 @@ export class Visual implements IVisual {
         if (!this.caixaFim.texto.dataset.editando) {
             this.caixaFim.texto.value = this.formatar(fim);
         }
+        this.configurarNativo(this.caixaIni, ini);
+        this.configurarNativo(this.caixaFim, fim);
         const total = this.diasTotais();
         for (const r of [this.rangeIni, this.rangeFim]) {
             r.max = String(total);
@@ -718,6 +743,7 @@ export class Visual implements IVisual {
             caixa.campo.style.borderColor = frente || d.corBorda.value.value;
             caixa.campo.style.borderRadius = `${d.raio.value}px`;
             caixa.texto.readOnly = bloqueado;
+            caixa.nativo.disabled = bloqueado || !d.mostrar.value || modo === "dropdown";
             caixa.texto.style.textAlign = String(d.alinhamentoTexto.value.value);
             caixa.texto.title = bloqueado ? "Datas definidas pelo período rápido ativo" : "Digite a data e tecle Enter (↑/↓ mudam uma unidade do nível escolhido)";
         }

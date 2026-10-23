@@ -44,12 +44,15 @@ try {
         const guardado = JSON.parse(JSON.stringify(enviado));
         atualizar("igual", nivel, true, [guardado]);
         assert(P.formatar(interno.filtro.inicio, nivel, "dd/MM/yyyy") === P.formatar(d, nivel, "dd/MM/yyyy"), `Roundtrip ${nivel}`);
-        elemento.querySelector<HTMLButtonElement>(".fdp-cal").click();
-        const labels = [...elemento.querySelectorAll(".fdp-popup select")].map(e => e.getAttribute("aria-label"));
-        const esperado = { ano: ["Ano"], mes: ["Ano", "Mês"], dia: ["Ano", "Mês"], hora: ["Ano", "Mês", "Hora"], minuto: ["Ano", "Mês", "Hora", "Minuto"], segundo: ["Ano", "Mês", "Hora", "Minuto", "Segundo"] };
-        assert(JSON.stringify(labels) === JSON.stringify(esperado[nivel]), `Componentes do calendário ${nivel}`);
-        assert(elemento.querySelectorAll(".fdp-dias button").length === (["ano", "mes"].includes(nivel) ? 0 : 31), `Dias do calendário ${nivel}`);
-        interno.seletor.fechar();
+        const nativo = elemento.querySelector<HTMLInputElement>(".fdp-nativo");
+        const tipos = { ano: "date", mes: "month", dia: "date", hora: "datetime-local", minuto: "datetime-local", segundo: "datetime-local" };
+        assert(nativo.type === tipos[nivel], `Seletor nativo ${nivel}`);
+        assert(nativo.step === (nivel === "hora" ? "3600" : nivel === "minuto" ? "60" : "1"), `Passo nativo ${nivel}`);
+        assert(!elemento.querySelector(".fdp-dias"), "Sem calendário HTML próprio");
+        nativo.value = nivel === "mes" ? "2026-10" : ["ano", "dia"].includes(nivel) ? "2026-10-23" : "2026-10-23T14:30:45";
+        nativo.dispatchEvent(new Event("change"));
+        assert(enviado.conditions[0].value === P.iso(P.inicio(d, nivel)), `Seleção nativa ${nivel}`);
+        assert(enviado.conditions[1].value === P.iso(P.proximo(d, nivel)), `Limite da seleção nativa ${nivel}`);
     }
     atualizar("entre", "minuto");
     interno.escolherIntervalo(new Date(2026, 9, 23, 14, 30), new Date(2026, 9, 23, 14, 32));
@@ -83,5 +86,12 @@ try {
     elemento.querySelector<HTMLButtonElement>(".fdp-botao").click();
     assert(enviado.conditions[0].value.endsWith("T00:00:00") && enviado.conditions[1].value.endsWith("T00:00:00"), "Período rápido usa dias completos");
     atualizar("entre", "minuto");
-    resultado.textContent = `${total} verificações passaram.\nOcultação, aviso, modos, seis calendários, filtros, roundtrip e dropdown.`;
+    if (location.search.includes("compact")) {
+        atualizar("entre", "dia");
+        elemento.style.cssText = "width:400px;height:60px";
+        document.querySelector("h1").style.display = "none";
+        resultado.style.display = "none";
+        document.body.style.margin = "0";
+    }
+    resultado.textContent = `${total} verificações passaram.\nOcultação, aviso, modos, seletores nativos, filtros, roundtrip e dropdown.`;
 } catch (e) { resultado.textContent = `FALHOU: ${e.stack}`; }

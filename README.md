@@ -6,7 +6,7 @@ Visual do Power BI que junta o segmentador de datas **Entre** com **botões de p
 
 ## Como usar
 
-1. No Power BI Desktop: **Visualizações › … › Importar um visual de um arquivo** e escolha `dist/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.0.0.pbiviz`.
+1. No Power BI Desktop: **Visualizações › … › Importar um visual de um arquivo** e escolha `dist/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.1.0.pbiviz`.
 2. Arraste **a coluna de data** para o campo **Data**. Use a coluna, não a hierarquia: se aparecer Ano/Trimestre/Mês/Dia, clique na seta do campo e escolha o nome dele.
 3. Configure em **Formatar › Períodos rápidos › Períodos** (e, se precisar, *Variáveis*).
 4. Ligue **Formatar › Guia de configuração › Mostrar guia no visual** para ver, dentro do visual, todas as regras, as âncoras e variáveis com as datas que elas dão hoje, exemplos e os erros. O guia só aparece no modo de edição; desligue quando terminar.
@@ -20,11 +20,11 @@ Em **Formatar › Caixas de data**:
 - **Mostrar**: desligue para usar somente os períodos rápidos. O controle deslizante fica oculto e, se estiver ligado, recebe um aviso no painel de formatação.
 - **Tipo de seleção**: **Entre** usa início e fim; **É** usa uma caixa e seleciona uma única unidade; **Dropdown** lista as datas do campo, sem duplicatas, em ordem cronológica, com busca. O dropdown também seleciona uma única unidade e dispensa o deslizante.
 - **Nível do filtro**: ano, mês, dia, hora, minuto ou segundo. O formato da data continua configurável para os níveis que incluem dia. Mês usa `mm/aaaa` e ano usa `aaaa`.
-- O calendário mostra somente os componentes do nível escolhido. Para níveis com horário, permite selecionar hora, minuto e segundo conforme necessário, antes de clicar em **Aplicar**.
+- O ícone abre o seletor nativo do navegador, que pode ultrapassar a área do visual: data para dia/ano, mês para mês/ano e data/hora para os níveis com horário. Não há calendário HTML próprio. O navegador controla os componentes disponíveis no popup; não existe seletor nativo exclusivo de ano. Nesse nível, escolha uma data e o filtro usa o ano inteiro, ou digite diretamente o ano na caixa. Segundos podem ser digitados na caixa mesmo quando não aparecem no popup do navegador.
 - Uma unidade é inclusiva: `10/2026` inclui todo outubro; `23/10/2026 14:30` inclui o minuto de 14:30:00 até antes de 14:31:00. Em **Entre**, inclui toda a última unidade escolhida.
 - As setas ↑/↓ alteram uma unidade do nível escolhido. O deslizante acompanha esse nível, percorrendo os valores existentes nos dados; em **É**, apresenta uma alça.
 
-Os períodos rápidos continuam selecionando dias completos. Os popups ficam limitados à área disponível do visual: aumente sua altura para facilitar a navegação. A lista solicita os segmentos adicionais ao Power BI; os limites de entrega de dados do próprio host continuam aplicáveis.
+Os períodos rápidos continuam selecionando dias completos. O dropdown com busca é uma lista HTML e permanece dentro da área do visual. O calendário usa o popup nativo, independente dessa área. A lista solicita os segmentos adicionais ao Power BI; os limites de entrega de dados do próprio host continuam aplicáveis.
 
 ## Períodos rápidos
 
