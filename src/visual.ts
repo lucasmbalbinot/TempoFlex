@@ -285,26 +285,32 @@ export class Visual implements IVisual {
             this.rotuloFiltro = undefined;
             this.filtroConhecido = true;
         }
+        let ini: Date | null = null;
+        let fimExclusivo: Date | null = null;
         for (const f of (filtros || []) as IAdvancedFilter[]) {
-            if (f && f.conditions) {
-                this.rotuloFiltro = f.displaySettings && f.displaySettings.displayName || undefined;
-                let ini: Date | null = null;
-                let fimExclusivo: Date | null = null;
+            const target = f && f.target as IFilterColumnTarget;
+            if (f && f.conditions && f.logicalOperator !== "Or" &&
+                target?.table === this.alvo?.table && target?.column === this.alvo?.column) {
+                const rotulo = f.displaySettings && f.displaySettings.displayName;
+                if (rotulo) { this.rotuloFiltro = rotulo; }
                 for (const c of f.conditions) {
                     const d = P.deValor(c.value);
+                    if (!d) { continue; }
                     if (c.operator === "GreaterThanOrEqual" || c.operator === "GreaterThan") {
-                        ini = d && c.operator === "GreaterThan" ? new Date(+d + 1) : d;
+                        const limite = c.operator === "GreaterThan" ? new Date(+d + 1) : d;
+                        ini = !ini || limite > ini ? limite : ini;
                     } else if (c.operator === "LessThan" || c.operator === "LessThanOrEqual") {
-                        fimExclusivo = d && c.operator === "LessThanOrEqual" ? new Date(+d + 1) : d;
+                        const limite = c.operator === "LessThanOrEqual" ? new Date(+d + 1) : d;
+                        fimExclusivo = !fimExclusivo || limite < fimExclusivo ? limite : fimExclusivo;
                     }
                 }
-                if (ini || fimExclusivo) {
-                    this.filtro = {
-                        inicio: ini || min || fimExclusivo,
-                        fim: fimExclusivo ? new Date(+fimExclusivo - 1) : (max || ini),
-                    };
-                }
             }
+        }
+        if (ini || fimExclusivo) {
+            this.filtro = {
+                inicio: ini || min || fimExclusivo,
+                fim: fimExclusivo ? new Date(+fimExclusivo - 1) : (max || ini),
+            };
         }
 
         const vars = lerVariaveis(this.cfg.periodos.variaveis.value);
@@ -325,8 +331,8 @@ export class Visual implements IVisual {
     /**
      * Qual período está valendo. O filtro é a fonte da verdade: ele é o que sincroniza entre abas,
      * vai nos indicadores e continua igual no modo leitura. A ordem é:
-     *  1. o nome do período que veio dentro do filtro;
-     *  2. um período cujas datas de hoje batem com o filtro (o gravado neste visual tem preferência);
+     *  1. um período cujas datas de hoje batem com o filtro; nomes só desempatam;
+     *  2. o nome do período que veio dentro do filtro, para períodos de dias anteriores;
      *  3. o período gravado, se o filtro são as datas dele no dia em que foi aplicado (ex.: "Mês atual" de ontem);
      *  4. senão, datas escolhidas à mão.
      */
@@ -337,17 +343,20 @@ export class Visual implements IVisual {
             const gravado = tudo.find(p => p.rotulo === this.estadoPeriodo);
             return gravado ? gravado.rotulo : tudo.length ? tudo[0].rotulo : SEM_PERIODO;
         }
+        // A sincronização transmite as datas; o nome e estado locais da outra aba
+        // podem continuar antigos (inclusive #manual). Compare o intervalo antes.
+        const batem = this.periodos.filter(p => !p.tudo && this.mesmoPeriodo(calcular(p, ctx), this.filtro));
+        if (batem.length) {
+            const doFiltro = batem.find(p => p.rotulo === this.rotuloFiltro);
+            const gravado = batem.find(p => p.rotulo === this.estadoPeriodo);
+            return (doFiltro || gravado || batem[0]).rotulo;
+        }
         if (this.rotuloFiltro === MANUAL) {
             return MANUAL;
         }
         const doFiltro = this.periodos.find(p => !p.tudo && p.rotulo === this.rotuloFiltro);
         if (doFiltro) {
             return doFiltro.rotulo;
-        }
-        const batem = this.periodos.filter(p => !p.tudo && this.mesmoPeriodo(calcular(p, ctx), this.filtro));
-        if (batem.length) {
-            const gravado = batem.find(p => p.rotulo === this.estadoPeriodo);
-            return (gravado || batem[0]).rotulo;
         }
         const gravado = this.periodos.find(p => !p.tudo && p.rotulo === this.estadoPeriodo);
         if (gravado) {
@@ -443,7 +452,11 @@ export class Visual implements IVisual {
     }
 
     private mesmoPeriodo(a: Intervalo | null, b: Intervalo | null): boolean {
-        return !!a && !!b && +D.inicioDoDia(a.inicio) === +b.inicio && +D.somarDias(a.fim, 1) - 1 === +b.fim;
+        if (!a || !b || +D.inicioDoDia(a.inicio) !== +b.inicio) { return false; }
+        // O filtro emitido tem precisão de segundo. O host pode devolver o fim
+        // como <= 23:59:59 ou < 00:00:00 do dia seguinte; ambos cobrem o período.
+        const proximoDia = +D.somarDias(a.fim, 1);
+        return +b.fim >= proximoDia - 1000 && +b.fim < proximoDia;
     }
 
     private mesmoIntervalo(a: Intervalo | null, b: Intervalo | null): boolean {

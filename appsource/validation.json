@@ -1,5 +1,5 @@
 {
-  "packageVersion": "1.4.5.0",
+  "packageVersion": "1.4.6.0",
   "desktop": { "validated": false, "version": null, "date": null },
   "service": { "validated": false, "date": null },
   "sampleReport": { "offlineValidated": false, "sameVisualVersionValidated": false },

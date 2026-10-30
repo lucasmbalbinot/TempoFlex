@@ -1,5 +1,12 @@
 # Histórico de versões
 
+## 1.4.6
+
+- Reconhecimento do botão rápido pelo intervalo sincronizado, mesmo sem rótulo ou estado local na outra aba.
+- Leitura restrita à coluna de data do visual, combinando limites de filtros separados.
+- Reconhecimento de finais inclusivos com precisão de segundo.
+- Testes da marcação de Hoje, Mês atual e Mês anterior entre duas instâncias.
+
 ## 1.4.5
 
 - Preserva o filtro rápido ao retornar à aba quando a atualização omite jsonFilters.

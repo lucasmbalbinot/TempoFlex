@@ -363,7 +363,7 @@ O filtro usa a coluna associada ao campo Data. Internamente, o final é exclusiv
 | Mês 10/2026 | Data ≥ 01/10 00:00 e Data < 01/11 00:00 |
 | Minuto 23/10/2026 14:30 | Data ≥ 14:30:00 e Data < 14:31:00 |
 
-O filtro recebido é a referência para a seleção. O nome do período vai no filtro, e há estado persistido para ajudar a reconhecer o botão. O código concilia atualizações atrasadas enquanto o Power BI confirma a escolha.
+O filtro recebido é a referência para a seleção. Quando as datas recebidas correspondem a um período rápido, o botão fica marcado mesmo que a outra aba tenha um nome ou estado local antigo, inclusive uma seleção manual anterior. O nome do período vai no filtro, e há estado persistido para desempatar períodos com as mesmas datas. O código concilia atualizações atrasadas enquanto o Power BI confirma a escolha.
 
 **Períodos relativos** são recalculados quando o visual recebe atualização. Digitação, calendário, dropdown e deslizante produzem **datas fixas**. Não existe um temporizador para atualizar à meia-noite.
 

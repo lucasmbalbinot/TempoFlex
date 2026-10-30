@@ -10,7 +10,7 @@
 
 TempoFlex reúne **seleção de datas**, **calendário nativo**, **controle deslizante** e **períodos rápidos configuráveis** em um visual do Power BI. Crie atalhos como Hoje, Mês anterior e Ano atual, ou use ciclos próprios, como um mês de competência que começa no dia 26. Sem tabela ou medida auxiliar.
 
-Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.5**.
+Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.6**.
 
 ## Documentação
 
@@ -45,7 +45,7 @@ Desenvolvido por **Lucas Machado Balbinot**. Versão atual: **1.4.5**.
 
 ## Comece em poucos passos
 
-1. [Baixe o `.pbiviz` da versão 1.4.5](https://github.com/lucasmbalbinot/TempoFlex/releases/download/v1.4.5/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.5.0.pbiviz) na [release oficial](https://github.com/lucasmbalbinot/TempoFlex/releases/tag/v1.4.5), ou [gere o pacote a partir do código](docs/DESENVOLVIMENTO.md).
+1. [Baixe o `.pbiviz` da versão 1.4.6](https://github.com/lucasmbalbinot/TempoFlex/releases/download/v1.4.6/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.6.0.pbiviz) na [release oficial](https://github.com/lucasmbalbinot/TempoFlex/releases/tag/v1.4.6), ou [gere o pacote a partir do código](docs/DESENVOLVIMENTO.md).
 2. No Power BI Desktop, abra **Visualizações → … → Importar um visual de um arquivo** e selecione o `.pbiviz`.
 3. Adicione TempoFlex à página e arraste uma coluna do tipo **Data** ou **Data/Hora** para o campo **Data** do visual. Escolha a coluna, **sem a hierarquia automática**.
 4. Em **Formatar visual → Caixas de data**, escolha o modo e o nível do filtro.
