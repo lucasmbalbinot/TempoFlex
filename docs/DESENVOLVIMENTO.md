@@ -19,7 +19,7 @@ npm run package
 `npm ci` instala o lockfile sem atualizá-lo. `npm run package` gera o `.pbiviz` em `dist/`; essa pasta não é versionada. O nome do arquivo usa o GUID técnico, que é preservado para compatibilidade:
 
 ```text
-dist/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.3.0.pbiviz
+dist/filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.4.0.pbiviz
 ```
 
 ## Comandos

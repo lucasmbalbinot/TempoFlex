@@ -19,11 +19,12 @@ const host: any = {
 const visual = new Visual({ element: elemento, host } as any);
 const interno = visual as any;
 const datas = ["2026-12-31T23:59:59", "2026-10-23T14:30:45", "2026-01-01T00:00:00", "2026-10-23T14:30:46"];
-function atualizar(modo: string, nivel: P.Nivel, mostrar = true, filtros: unknown[] = [], segmento = false): void {
+function atualizar(modo: string, nivel: P.Nivel, mostrar = true, filtros: unknown[] = [], segmento = false, periodo?: string): void {
     visual.update({
         viewMode: 1, jsonFilters: filtros,
         dataViews: [{ metadata: { columns: [], ...(segmento ? { segment: {} } : {}), objects: {
-            datas: { modo, nivel, mostrar }, periodos: { lista: "Hoje = hoje\nGeral = tudo" },
+            datas: { modo, nivel, mostrar }, periodos: { lista: "Hoje = hoje\nOntem = ontem\nGeral = tudo" },
+            estado: periodo === undefined ? {} : { periodo, aplicadoEm: "2026-10-30" },
         } }, categorical: { categories: [{ source: { queryName: "Tabela.Data", type: { dateTime: true } }, values: datas }] } }],
     } as any);
     assert(!falha, `Erro no update: ${falha}`);
@@ -33,7 +34,7 @@ try {
     assert(elemento.querySelector<HTMLElement>(".fdp-datas").style.display === "none", "Ocultar caixas");
     assert(elemento.querySelector<HTMLElement>(".fdp-deslizante").style.display === "none", "Ocultar slider");
     assert(!!(visual.getFormattingModel().cards.find((c: any) => c.uid === "deslizante-card") as any).warningMessage, "Aviso no cartão");
-    assert(elemento.querySelectorAll(".fdp-botao").length === 2, "Somente períodos");
+    assert(elemento.querySelectorAll(".fdp-botao").length === 3, "Somente períodos");
     for (const nivel of ["ano", "mes", "dia", "hora", "minuto", "segundo"] as P.Nivel[]) {
         atualizar("igual", nivel);
         assert(elemento.querySelectorAll<HTMLElement>(".fdp-campo")[1].style.display === "none", "É tem só uma caixa");
@@ -54,6 +55,42 @@ try {
         assert(enviado.conditions[0].value === P.iso(P.inicio(d, nivel)), `Seleção nativa ${nivel}`);
         assert(enviado.conditions[1].value === P.iso(P.proximo(d, nivel)), `Limite da seleção nativa ${nivel}`);
     }
+    atualizar("entre", "minuto");
+    // A edição perde o foco no mousedown: o botão precisa sobreviver ao redraw
+    // para que o mouseup complete o clique no mesmo elemento.
+    interno.pendente = null;
+    atualizar("entre", "dia", true, [], false, "Geral");
+    const botao = (rotulo: string) => [...elemento.querySelectorAll<HTMLButtonElement>(".fdp-botao")].find(b => b.dataset.rotulo === rotulo);
+    const hoje = botao("Hoje");
+    const editando = elemento.querySelector<HTMLInputElement>(".fdp-texto");
+    editando.value = "23/10/2026";
+    editando.dispatchEvent(new Event("input"));
+    hoje.dispatchEvent(new MouseEvent("mousedown", { bubbles: true }));
+    editando.dispatchEvent(new Event("blur"));
+    assert(botao("Hoje") === hoje && hoje.isConnected, "Blur preserva botão pressionado");
+    atualizar("entre", "dia", true, [], false, "Geral");
+    assert(botao("Hoje") === hoje, "Update do host preserva botão pressionado");
+    hoje.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
+    hoje.click();
+    const filtroHoje = JSON.parse(JSON.stringify(enviado));
+    assert(botao("Hoje").getAttribute("aria-pressed") === "true", "Primeiro clique marca Hoje");
+    atualizar("entre", "dia", true, [filtroHoje], false, "Geral");
+    atualizar("entre", "dia", true, [], false, "Geral");
+    assert(botao("Hoje").getAttribute("aria-pressed") === "true", "Filtro confirmado antes da propriedade não perde seleção");
+    atualizar("entre", "dia", true, [], false, "Hoje");
+    assert(botao("Hoje").getAttribute("aria-pressed") === "true", "Propriedade confirmada antes do filtro não perde seleção");
+    atualizar("entre", "dia", true, [filtroHoje], false, "Hoje");
+    assert(interno.pendente === null, "Confirmação das duas partes conclui sincronização");
+    botao("Ontem").click();
+    const filtroOntem = JSON.parse(JSON.stringify(enviado));
+    atualizar("entre", "dia", true, [filtroHoje], false, "Hoje");
+    assert(botao("Ontem").getAttribute("aria-pressed") === "true", "Troca em um clique resiste ao estado anterior");
+    atualizar("entre", "dia", true, [filtroOntem], false, "Ontem");
+    botao("Geral").click();
+    atualizar("entre", "dia", true, [filtroOntem], false, "Geral");
+    assert(botao("Geral").getAttribute("aria-pressed") === "true", "Limpeza em um clique resiste ao filtro atrasado");
+    atualizar("entre", "dia", true, [], false, "Geral");
+    assert(!elemento.querySelector(".fdp-popup button:not([role=option]), .fdp-dias, .fdp-calendario, [role=grid]"), "Nenhuma grade de calendário customizado");
     atualizar("entre", "minuto");
     interno.escolherIntervalo(new Date(2026, 9, 23, 14, 30), new Date(2026, 9, 23, 14, 32));
     assert(enviado.conditions[1].value === "2026-10-23T14:33:00", "Entre inclui toda a última unidade");

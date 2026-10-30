@@ -350,19 +350,21 @@ export class Visual implements IVisual {
      */
     private conciliarPendente(): void {
         this.filtroHost = this.filtro;
-        this.periodoHost = this.periodoAtivo;
+        this.periodoHost = this.estadoPeriodo;
         const p = this.pendente;
         if (!p) {
             return;
         }
         const filtroOk = this.mesmoIntervalo(this.filtro, p.filtro);
-        const periodoOk = this.periodoAtivo === p.periodo;
+        // resolverPeriodo pode inferir o botão pelas datas antes de persistProperties
+        // ser confirmado. Só encerra a espera quando a propriedade também chegou.
+        const periodoOk = this.periodoAtivo === p.periodo && this.estadoPeriodo === p.periodo;
         if (filtroOk && periodoOk) {
             this.pendente = null;
             return;
         }
         const filtroAtrasado = !filtroOk && p.filtrosAntigos.some(f => this.mesmoIntervalo(this.filtro, f));
-        const periodoAtrasado = !periodoOk && p.periodosAntigos.includes(this.periodoAtivo);
+        const periodoAtrasado = !periodoOk && (this.estadoPeriodo === p.periodo || p.periodosAntigos.includes(this.estadoPeriodo));
         if ((filtroOk || filtroAtrasado) && (periodoOk || periodoAtrasado)) {
             this.filtro = p.filtro;
             this.periodoAtivo = p.periodo;
@@ -453,22 +455,24 @@ export class Visual implements IVisual {
             { operator: "LessThan", value: P.iso(exclusivo) }).toJSON();
         // O nome do período vai junto com o filtro: assim ele sincroniza entre abas e vai nos indicadores
         filtro.displaySettings = { displayName: periodo };
-        this.host.applyJsonFilter(filtro, "general", "filter", FilterAction.merge);
         this.rotuloFiltro = periodo;
         this.filtro = { inicio: ini, fim };
-        this.gravarPeriodo(periodo);
+        this.periodoAtivo = periodo;
         this.marcarPendente(periodo);
         this.desenhar();
+        this.gravarPeriodo(periodo);
+        this.host.applyJsonFilter(filtro, "general", "filter", FilterAction.merge);
     }
 
     private limpar(periodo: string): void {
         this.ultimoAplicado = "";
-        this.host.applyJsonFilter(null, "general", "filter", FilterAction.remove);
         this.filtro = null;
         this.rotuloFiltro = undefined;
-        this.gravarPeriodo(periodo);
+        this.periodoAtivo = periodo;
         this.marcarPendente(periodo);
         this.desenhar();
+        this.gravarPeriodo(periodo);
+        this.host.applyJsonFilter(null, "general", "filter", FilterAction.remove);
     }
 
     private marcarPendente(periodo: string): void {
@@ -786,9 +790,9 @@ export class Visual implements IVisual {
 
     private desenharBotoes(frente: string | null, fundo: string | null, destaque: string | null, semInteracao: boolean): void {
         const b = this.cfg.botoes;
-        const focado = document.activeElement instanceof HTMLButtonElement && this.areaBotoes.contains(document.activeElement)
-            ? document.activeElement.dataset.rotulo : null;
-        this.areaBotoes.replaceChildren();
+        // Preserve o elemento entre mousedown e mouseup, inclusive se o blur de
+        // uma caixa de data ou uma atualização do host redesenhar o visual.
+        const existentes = Array.from(this.areaBotoes.children) as HTMLButtonElement[];
         const itens: { rotulo: string; acao: () => void; ativo: boolean; titulo: string }[] = [];
 
         for (const p of this.periodos) {
@@ -813,8 +817,11 @@ export class Visual implements IVisual {
         }
         this.areaBotoes.style.display = itens.length ? "" : "none";
 
-        for (const it of itens) {
-            const bt = this.el("button", "fdp-botao", this.areaBotoes);
+        for (const [indice, it] of itens.entries()) {
+            let bt = existentes[indice];
+            if (!bt) {
+                bt = this.el("button", "fdp-botao", this.areaBotoes);
+            }
             bt.type = "button";
             bt.textContent = it.rotulo;
             bt.title = it.titulo;
@@ -828,11 +835,9 @@ export class Visual implements IVisual {
             bt.style.padding = `${b.preenchimento.value}px ${b.preenchimento.value * 2}px`;
             bt.style.minWidth = b.larguraMinima.value ? `${b.larguraMinima.value}px` : "";
             bt.disabled = semInteracao;
-            bt.addEventListener("click", it.acao);
-            if (focado === it.rotulo) {
-                bt.focus();
-            }
+            bt.onclick = it.acao;
         }
+        for (const bt of existentes.slice(itens.length)) { bt.remove(); }
     }
 
     public getFormattingModel(): powerbi.visuals.FormattingModel {

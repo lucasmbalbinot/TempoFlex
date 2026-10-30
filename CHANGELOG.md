@@ -1,5 +1,11 @@
 # Histórico de versões
 
+## 1.4.4
+
+- Botões rápidos preservados durante atualizações e confirmação de digitação, evitando perda do primeiro clique.
+- Seleção pendente aguarda confirmação do filtro e da propriedade pelo Power BI.
+- Calendário exclusivamente nativo; pacote regenerado com nova versão para identificar a atualização.
+
 ## 1.4.3
 
 - URLs reais do repositório TempoFlex e suporte configuradas nos metadados.
