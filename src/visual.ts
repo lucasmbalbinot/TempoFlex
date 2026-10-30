@@ -109,6 +109,7 @@ export class Visual implements IVisual {
     } | null = null;
     private filtroHost: Intervalo | null = null;          // último estado recebido do Power BI
     private periodoHost: string | undefined;
+    private filtroConhecido = false;
 
     constructor(options: VisualConstructorOptions) {
         this.host = options.host;
@@ -262,12 +263,29 @@ export class Visual implements IVisual {
         this.max = max;
         this.dadosIncompletos = !!dv.metadata.segment;
         if (this.dadosIncompletos) { this.host.fetchMoreData(true); }
-        this.alvo = this.alvoDoCampo(cat.source);
+        const alvo = this.alvoDoCampo(cat.source);
+        if (alvo?.table !== this.alvo?.table || alvo?.column !== this.alvo?.column) {
+            this.filtro = null;
+            this.rotuloFiltro = undefined;
+            this.filtroConhecido = false;
+            this.pendente = null;
+        }
+        this.alvo = alvo;
 
-        this.filtro = null;
-        this.rotuloFiltro = undefined;
-        const filtros = options.jsonFilters || [];
-        for (const f of filtros as IAdvancedFilter[]) {
+        // Ao reativar a página, jsonFilters pode não vir na atualização.
+        // Ausência de snapshot não significa que o filtro foi removido.
+        const objetos = dv.metadata && dv.metadata.objects;
+        const general = objetos && objetos["general"];
+        const temFiltroGravado = !!general && Object.prototype.hasOwnProperty.call(general, "filter");
+        const gravado = general && general["filter"] as unknown as IAdvancedFilter | IAdvancedFilter[] | null;
+        const filtros = options.jsonFilters !== undefined ? options.jsonFilters :
+            temFiltroGravado ? (Array.isArray(gravado) ? gravado : gravado ? [gravado] : []) : undefined;
+        if (filtros !== undefined) {
+            this.filtro = null;
+            this.rotuloFiltro = undefined;
+            this.filtroConhecido = true;
+        }
+        for (const f of (filtros || []) as IAdvancedFilter[]) {
             if (f && f.conditions) {
                 this.rotuloFiltro = f.displaySettings && f.displaySettings.displayName || undefined;
                 let ini: Date | null = null;
@@ -296,7 +314,6 @@ export class Visual implements IVisual {
         this.periodos = this.cfg.periodos.mostrar.value ? lidos.periodos : [];
         this.erros = lidos.erros;
 
-        const objetos = dv.metadata && dv.metadata.objects;
         const estado = objetos && objetos["estado"];
         this.estadoPeriodo = estado && typeof estado["periodo"] === "string" ? estado["periodo"] as string : undefined;
         this.estadoData = estado && typeof estado["aplicadoEm"] === "string" ? D.deIso(estado["aplicadoEm"] as string) : null;
@@ -389,6 +406,13 @@ export class Visual implements IVisual {
      */
     private aplicarPeriodoGuardado(): void {
         if (!this.filtro) {
+            // Uma nova instância pode receber primeiro só as propriedades salvas.
+            // Restaura o atalho apenas enquanto não há snapshot explícito de filtros.
+            const guardado = this.periodos.find(p => p.rotulo === this.estadoPeriodo && !p.tudo);
+            if (!this.filtroConhecido && guardado) {
+                this.escolherPeriodo(guardado);
+                return;
+            }
             const padrao = this.periodos.find(p => p.padrao);
             const temTudo = this.periodos.some(p => p.tudo);
             if (padrao && !padrao.tudo && (this.estadoPeriodo === undefined || !temTudo)) {

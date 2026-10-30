@@ -1,7 +1,7 @@
 {
   "name": "tempoflex-powerbi",
   "description": "TempoFlex: filtro de datas para Power BI com períodos rápidos, ciclos personalizados e calendário nativo",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/lucasmbalbinot/TempoFlex.git"
@@ -11,7 +11,7 @@
     "start": "pbiviz start",
     "package": "pbiviz package",
     "lint": "npx eslint .",
-    "test": "tsc -p tsconfig.test.json && node .tmp/test/test/periodos.test.js && node .tmp/test/test/precisao.test.js",
+    "test": "tsc -p tsconfig.test.json && node .tmp/test/test/periodos.test.js && node .tmp/test/test/precisao.test.js && node test/estado.test.cjs",
     "test:browser:build": "node test/browser.cjs",
     "typecheck": "tsc --noEmit",
     "assets:build": "node scripts/build-assets.cjs",

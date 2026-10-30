@@ -15,11 +15,11 @@ Esse comando gera as imagens por renderização SVG, dados fictícios, executa t
 
 ```text
 dist/
-  filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.4.0.pbiviz
-  TempoFlex-1.4.4-source.zip
-  TempoFlex-1.4.4-publicacao.zip
-  TempoFlex-1.4.4-release.json
-  TempoFlex-1.4.4-SHA256SUMS.txt
+  filtroDataPeriodoA7C31E0B5F2D4E6C9B8A.1.4.5.0.pbiviz
+  TempoFlex-1.4.5-source.zip
+  TempoFlex-1.4.5-publicacao.zip
+  TempoFlex-1.4.5-release.json
+  TempoFlex-1.4.5-SHA256SUMS.txt
 ```
 
 O ZIP público contém binário, fonte correspondente, documentação, termos, mídia e um registro de pendências. Não inclui certificados, `node_modules`, `.git`, backups de recuperação ou dados reais. O arquivo de checksums permite conferir os binários que serão enviados.
@@ -39,8 +39,8 @@ Este comando é uma instrução para o publicador, não uma indicação de que o
 Para uma release da versão atual, crie uma tag no commit revisado e publique a release pelo GitHub. Use uma mensagem descritiva, por exemplo:
 
 ```bash
-git tag -a v1.4.4 -m "TempoFlex 1.4.4 — kit de publicação e documentação"
-git push origin v1.4.4
+git tag -a v1.4.5 -m "TempoFlex 1.4.5 — kit de publicação e documentação"
+git push origin v1.4.5
 ```
 
 Anexe o `.pbiviz`, o ZIP de fonte correspondente, `LICENSE`, avisos de terceiros e checksums. O ZIP de publicação reúne os materiais, mas seu nome não significa que o AppSource foi aprovado.

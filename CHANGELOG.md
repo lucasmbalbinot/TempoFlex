@@ -1,5 +1,11 @@
 # Histórico de versões
 
+## 1.4.5
+
+- Preserva o filtro rápido ao retornar à aba quando a atualização omite jsonFilters.
+- Recupera o filtro dos metadados ou o período salvo ao recriar o visual, respeitando limpezas explícitas.
+- Testes de regressão para navegação, restauração e limpeza.
+
 ## 1.4.4
 
 - Botões rápidos preservados durante atualizações e confirmação de digitação, evitando perda do primeiro clique.
